@@ -39,6 +39,10 @@ pipeline {
     }
 
     post {
+        always {
+            echo 'These steps are always executed'   
+            cleanWs()         
+        }
         success {
             // Runs only if the whole pipeline succeeds
             echo 'the deployment has worked'
