@@ -37,19 +37,21 @@ pipeline {
             }
         }
     }
-
     post {
         always {
             echo 'These steps are always executed'   
-            cleanWs()         
         }
+      
         success {
-            // Runs only if the whole pipeline succeeds
-            echo 'the deployment has worked'
-        }
-        failure {
-            // Runs only if the pipeline fails
-            echo 'An error has ocurred'
-        }
-    }
+        // One or more steps need to be included within each condition's block.
+          echo 'the deployment has worked'
+          archiveArtifacts allowEmptyArchive: true, artifacts: 'shopping/*.jsp', followSymlinks: false
+          cleanWs()         
+
+       }
+       failure {
+        // One or more steps need to be included within each condition's block.
+        echo 'An error has ocurred'
+      }
+ }
 }
